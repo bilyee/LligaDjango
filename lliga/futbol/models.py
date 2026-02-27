@@ -22,6 +22,7 @@ class Jugador(models.Model):
     nom = models.CharField(max_length=100)
     posicio = models.CharField(max_length=50)
     equip = models.ForeignKey(Equip, on_delete=models.CASCADE, related_name='jugadors')
+    edat = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.nom} - ({self.equip.nom})"
@@ -56,7 +57,7 @@ class Event(models.Model):
         ASSISTENCIA = "ASSISTENCIA"
         TARGETA_GROGA = "TARGETA_GROGA"
         TARGETA_VERMELLA = "TARGETA_VERMELLA"
-    partit = models.ForeignKey(Partit,on_delete=models.CASCADE)
+    partit = models.ForeignKey(Partit,on_delete=models.CASCADE, related_name="events")
     temps = models.TimeField()
     tipus = models.CharField(max_length=30,choices=EventType.choices)
     jugador = models.ForeignKey(Jugador,null=True,

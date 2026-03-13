@@ -1,0 +1,25 @@
+{% load static %}
+<!doctype html>
+<html lang="ca">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tria la Lliga</title>
+    <style>
+      body { font-family: sans-serif; padding: 1rem; }
+      form { margin-top: 1rem; }
+      select { padding: 6px; }
+      button { padding: 6px 10px; margin-left: 8px; }
+    </style>
+  </head>
+  <body>
+    <h1>Tria la lliga</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.lliga.label_tag }}
+      {{ form.lliga }}
+      <button type="submit">Mostrar classificació</button>
+    </form>
+    <p><a href="{% url 'clasificacio' %}">Veure classificació per la primera lliga</a></p>
+  </body>
+ </html>

@@ -1,8 +1,23 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
 
 # Create your views here.
 
 from .models import Lliga
+from .forms import LligaChoiceForm
+
+
+def index(request):
+	"""Render a small menu form to choose a league and go to its standings."""
+	if request.method == 'POST':
+		form = LligaChoiceForm(request.POST)
+		if form.is_valid():
+			lliga = form.cleaned_data['lliga']
+			return redirect('clasificacio_lliga', lliga_id=lliga.id)
+	else:
+		form = LligaChoiceForm()
+
+	return render(request, 'futbol/index.html', {'form': form})
 
 
 def standings(request, lliga_id=None):
